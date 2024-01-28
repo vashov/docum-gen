@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DocumGen.Application\DocumGen.Application.csproj" />
+    <ProjectReference Include="..\DocumGen.FileStorages\DocumGen.FileStorages.csproj" />
+    <ProjectReference Include="..\DocumGen.MessageBus.RabbitMq\DocumGen.MessageBus.RabbitMq.csproj" />
+    <ProjectReference Include="..\DocumGen.Persistence.InMemoryDb\DocumGen.Persistence.InMemoryDb.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
