@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "DocumGen.ConverterWorker": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7037;http://localhost:5121"
+    }
+  }
+}
