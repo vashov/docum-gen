@@ -8,6 +8,7 @@ using DocumGen.Persistence.InMemoryDb;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Net.Http.Headers;
 
 namespace DocumGen.Api
 {
@@ -33,6 +34,8 @@ namespace DocumGen.Api
             {
                 options.AddPolicy("Open", builder 
                     => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+                options.AddPolicy("FilePolicy", builder =>
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithExposedHeaders(HeaderNames.ContentDisposition));
             });
 
             return services;

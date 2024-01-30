@@ -2,6 +2,7 @@ using DocumGen.Application.Contracts.Pagination;
 using DocumGen.Application.Services.FileOrders;
 using DocumGen.Application.Services.FileOrders.Models;
 using DocumGen.Domain.Entities;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
@@ -53,6 +54,7 @@ namespace DocumGen.Api.Controllers
             return fileOrder;
         }
 
+        [EnableCors("FilePolicy")]
         [HttpGet("[action]")]
         public async Task DownloadFileResult([FromQuery] FileOrderRequest request)
         {
