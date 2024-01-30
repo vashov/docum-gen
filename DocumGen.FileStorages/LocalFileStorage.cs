@@ -1,4 +1,5 @@
 ﻿using DocumGen.Application.Contracts.FileStorages;
+using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -7,10 +8,14 @@ namespace DocumGen.FileStorages
     public class LocalFileStorage : IFileStorage
     {
         private LocalStorageConfiguration _localStorageConfiguration;
+        private readonly ILogger<LocalFileStorage> _logger;
 
-        public LocalFileStorage(LocalStorageConfiguration localStorageConfiguration)
+        public LocalFileStorage(
+            LocalStorageConfiguration localStorageConfiguration,
+            ILogger<LocalFileStorage> logger)
         {
             _localStorageConfiguration = localStorageConfiguration;
+            _logger = logger;
         }
 
         public async Task<bool> CreateWrite(string fileName, Stream dataStream)
@@ -29,7 +34,12 @@ namespace DocumGen.FileStorages
         public Task<bool> Exists(string fileName)
         {
             fileName = GetFullFileName(fileName);
-            return Task.FromResult(File.Exists(fileName));
+            bool isExists = File.Exists(fileName);
+            if (!isExists)
+            {
+                _logger.LogInformation("File {FileName} does not exist in local storage", fileName);
+            }
+            return Task.FromResult(isExists);
         }
 
         public Stream OpenRead(string fileName)
@@ -63,7 +73,8 @@ namespace DocumGen.FileStorages
 
         private string GetFullFileName(string fileName)
         {
-            return Path.Combine(_localStorageConfiguration.Path, fileName);
+            string fullFileName = Path.Combine(_localStorageConfiguration.Path, fileName);
+            return fullFileName;
         }
     }
 }
