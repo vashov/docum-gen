@@ -28,27 +28,31 @@ Things to consider
 - for ConverterWorker project .\DocumGen.ConverterWorker\appsettings.json -> LocalStorage -> Path
 - for API project .\DocumGen.API\appsettings.json -> LocalStorage -> Path
 ```
-2. Run RabbitMQ:
+2. Configure BrowserDownloadPath for puppeteersharp:
+```
+- for ConverterWorker project .\DocumGen.ConverterWorker\appsettings.json -> FileConverter -> BrowserDownloadPath
+```
+3. Run RabbitMQ:
 ```
 docker pull rabbitmq:3-management
 docker run --rm -it -p 15672:15672 -p 5672:5672 rabbitmq:3-management
 ```
-3. Run ConverterWorker project:
+4. Run ConverterWorker project:
 ```
 cd .\DocumGen.ConverterWorker\
 dotnet run
 ```
-4. Run API project:
+5. Run API project:
 ```
 cd .\DocumGen.Api\
 dotnet run
 ```
-5. Run Vue client:
+6. Run Vue client:
 ```
 cd .\documgen.ui.vue\
 npm run serve
 ```
-6. Open localhost:5002 in browser.
+7. Open localhost:5002 in browser.
 
 ### Out of solution scope
 - Authentication/Authorization
